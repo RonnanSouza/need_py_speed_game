@@ -13,7 +13,7 @@ class Faixa(pygame.sprite.Sprite):
         self.pos_x = 505
         self.pos_y = 360 
     
-    def muda_pos_faixa(self):
+    def mover_faixa(self):
         self.pos_x -= 0.9
         self.pos_y += 0.8 * (self.altura / 10)
         if self.pos_y > 1000:
@@ -22,7 +22,6 @@ class Faixa(pygame.sprite.Sprite):
             self.largura = 11
             self.altura = 15
 
-    def muda_tam_faixa(self):
         self.altura += 5 
         self.largura += 1
     def print_faixa(self, screen):

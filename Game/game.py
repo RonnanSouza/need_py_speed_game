@@ -6,11 +6,13 @@ from faixa import *
 from carro import *
 from arvores import *
 from intro_menu import *
+from objetos_pista import *
+from combustivel import *
 
 pygame.init()
 
 # Carregando intro do jogo
-introducao_jogo(True)
+#introducao_jogo(True)
 
 # Menu Raiz
 if menu_raiz(True):    
@@ -21,9 +23,11 @@ if menu_raiz(True):
         
     
     clock = pygame.time.Clock()
-    
+
+    comb = Combustivel(screen)
     carro = Carro(screen)
     faixas = [Faixa(screen)]
+    objeto = Carro_inimigo(screen)
     arvores_direita = [Arvores(screen, 'direita')]
     arvores_esquerda = [Arvores(screen, 'esquerda')]
     pygame.key.set_repeat(1,1)
@@ -44,34 +48,39 @@ if menu_raiz(True):
         
         tecla = pygame.key.get_pressed()
         carro.mover_carro(tecla)
-        if tecla[pygame.K_UP] and velocidade < 2:
-            velocidade += 0.1
-        elif tecla[pygame.K_DOWN]:
-            if velocidade < 1:
-                velocidae = 0
-            else: velocidade -= 1
     
-        tela.blit(fundo, (0, 0))
+
         if i % 10 == 0 and len(arvores_direita) < 6:
             arvores_direita.append(Arvores(screen, 'direita'))
             arvores_esquerda.append(Arvores(screen, 'esquerda'))
             faixas.append(Faixa(screen))
-       
-        for j in range(len(arvores_direita)):
-            arvores_direita[j].muda_pos_arvore('direita')
-            arvores_esquerda[j].muda_pos_arvore('esquerda')
-    
-            arvores_direita[j].muda_tam_arvore()
-            arvores_esquerda[j].muda_tam_arvore()
-    
-            faixas[j].muda_pos_faixa()
-            faixas[j].muda_tam_faixa()
+        tela.blit(fundo, (0, 0))
+      
+
         for j in range(len(arvores_direita)):
             faixas[j].print_faixa(screen)
             arvores_direita[j].print_arvore(screen)
             arvores_esquerda[j].print_arvore(screen)
-    
+            objeto.print_objeto(screen)
+            comb.print_comb(screen)
         carro.print_carro(screen)
-        pygame.display.update()        
+        pygame.display.update()
+
+
+
+        for j in range(len(arvores_direita)):
+            arvores_direita[j].mover_arvores('direita')
+            arvores_esquerda[j].mover_arvores('esquerda')
+            faixas[j].mover_faixa()
+            objeto.mover_objeto()
+            comb.mover_comb()
+
+
+        ''' if carro.rect_carro.colliderect(objeto.rect_objeto):
+                print 'Bateu'
+                sys.exit()
+        if comb.rect_comb.colliderect(carro.rect_carro):
+                print "Bateu"   
+        '''
         i += 1 
-        combustivel -= 0.1
+        combustivel -= 0 

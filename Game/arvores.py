@@ -19,7 +19,7 @@ class Arvores(pygame.sprite.Sprite):
         self.tam_arvore_x = 20 
         self.tam_arvore_y = 20
 
-    def muda_pos_arvore(self, lado):
+    def mover_arvores(self, lado):
         if lado == 'direita':
             self.pos_arvore_x += 1  * (self.tam_arvore_x / 6) 
         elif lado == 'esquerda':
@@ -38,9 +38,6 @@ class Arvores(pygame.sprite.Sprite):
             self.tam_arvore_x = 20
             self.tam_arvore_y = 20
 
-
-    
-    def muda_tam_arvore(self):  
         self.tam_arvore_x += 10 
         self.tam_arvore_y += 10 
 
