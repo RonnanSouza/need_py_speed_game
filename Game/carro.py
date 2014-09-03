@@ -5,6 +5,7 @@ class Carro(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.screen = screen
         self.img_carro = pygame.image.load('imagens' + os.sep + 'car.png')
+	self.img_carro = pygame.transform.scale(self.img_carro, (80, 80))
         self.rect_carro = self.img_carro.get_rect()
         self.pos_carro_x = (1024 / 2) - (384 / 2)
         self.pos_carro_y = 550
@@ -22,7 +23,7 @@ class Carro(pygame.sprite.Sprite):
             
     def print_carro(self, screen):
         self.screen.blit(self.img_carro, (self.pos_carro_x, self.pos_carro_y))
-        self.rect_carro.normalize()
+        #self.rect_carro.normalize()
 
 
         

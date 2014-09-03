@@ -65,8 +65,12 @@ if menu_raiz(True):
             comb.print_comb(screen)
         carro.print_carro(screen)
         pygame.display.update()
-
-
+         
+        carrorect = carro.rect_carro
+        objetorect =  objeto.rect_objeto
+        if carrorect.colliderect(objetorect):
+            print 'Bateu'
+            sys.exit()
 
         for j in range(len(arvores_direita)):
             arvores_direita[j].mover_arvores('direita')
@@ -74,13 +78,12 @@ if menu_raiz(True):
             faixas[j].mover_faixa()
             objeto.mover_objeto()
             comb.mover_comb()
+            
 
-
-        ''' if carro.rect_carro.colliderect(objeto.rect_objeto):
-                print 'Bateu'
-                sys.exit()
-        if comb.rect_comb.colliderect(carro.rect_carro):
-                print "Bateu"   
-        '''
+        print carrorect, objetorect
+        
+        """if comb.rect_comb.colliderect(carro.rect_carro):
+                print "Bateu"   """
+       
         i += 1 
         combustivel -= 0 
