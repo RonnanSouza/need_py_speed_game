@@ -11,13 +11,14 @@ class Carro(pygame.sprite.Sprite):
         self.pos_carro_y = 550
         self.rect_carro.x, self.rect_carro.y = (self.pos_carro_x, self.pos_carro_y)
 
-    def mover_carro(self, tecla):
+    def mover_carro(self, tecla, velocidade_carro):
         if tecla[pygame.K_LEFT] and self.pos_carro_x > -50:
-            self.pos_carro_x -= 20 
-            self.rect_carro.x -= 20
+            self.pos_carro_x -= velocidade_carro 
+            self.rect_carro.x -= velocidade_carro
         elif tecla[pygame.K_RIGHT] and self.pos_carro_x < 700:  
-            self.pos_carro_x += 20
-            self.rect_carro.x += 20
+            self.pos_carro_x += velocidade_carro
+            self.rect_carro.x += velocidade_carro
+
 
     
             
