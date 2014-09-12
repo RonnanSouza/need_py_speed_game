@@ -1,8 +1,8 @@
 # coding: utf-8
 
-import pygame, os, sys, time, pickle
+import pygame, os, sys, time, random, pickle
 from pygame import *
-from efeitos_jogo import *
+from efeitos_sonoros import *
 pygame.init()
 
 # Intrudução do jogo
@@ -47,7 +47,7 @@ def introducao_jogo():
     tela.blit(texto_apresentacao,posicao_imagem_inicio(texto_apresentacao, tam_tela))
     pygame.display.update()
     time.sleep(2)
-   
+
 
 def posicao_fonte(imagem, pos_inicial):
     x, y = pygame.mouse.get_pos()
@@ -58,20 +58,20 @@ def posicao_fonte(imagem, pos_inicial):
         return True
     return False
 
-# Menu reset
+# Menu Apagar Recorde
 def menu_reset():   
     while True:
-        '''menu = pygame.image.load('imagens' + os.sep + 'janela_apagar.jpg')
-        tela.blit(menu, [512,0])'''
-        pygame.draw.rect(tela,PRETO,[162,234,700,250],0)
+        menu = pygame.image.load('imagens' + os.sep + 'menu_configuracoes.jpg').convert()
+        tela.blit(menu, [0,0])
+        pygame.draw.rect(tela,BRANCO,[100,600,10,50],0)
         
-        fonte_menu1 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',40)
-        fonte_menu2 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',40)
+        fonte_menu1 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',45)
+        fonte_menu2 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',55)
 
-        texto1 = fonte_menu1.render('SEU RECORDE SERA APAGADO',True,AZUL)
-        texto2 = fonte_menu1.render('TEM CERTEZA QUE DESEJA CONTINUAR?',True,AZUL)
-        texto3 = fonte_menu2.render('SIM',True,AZUL)
-        texto4 = fonte_menu2.render('NAO',True,AZUL)
+        texto1 = fonte_menu1.render('SEU RECORDE SERA APAGADO.',True,AZUL_2)
+        texto2 = fonte_menu1.render('DESEJA REALMENTE CONTINUAR?',True,AZUL_2)
+        texto3 = fonte_menu2.render('SIM',True,AZUL_2)
+        texto4 = fonte_menu2.render('NAO',True,AZUL_2)
         
         tela.blit(texto1,[(largura_tela / 2) - (texto1.get_size()[0] / 2), 250])
         tela.blit(texto2,[(largura_tela / 2) - (texto2.get_size()[0] / 2), 300])
@@ -86,7 +86,7 @@ def menu_reset():
         for event in pygame.event.get():
             if (pygame.mouse.get_pressed()[0] and posicao_fonte(texto3, [400, 384])):
                 with open('salve_recordes' + os.sep + 'save_record.dat', 'wb') as f:
-                    pickle.dump(0, f)
+                    pickle.dump(0, f, 2)
                 return True
             elif (pygame.mouse.get_pressed()[0] and posicao_fonte(texto4, [550, 384])) or pygame.key.get_pressed()[K_ESCAPE]:
                 som_voltar.play(0)
@@ -108,9 +108,9 @@ def menu_recorde():
         fonte_menu1 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',70)
         fonte_menu2 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',50)
 
-        texto1 = fonte_menu1.render('RECORDE',True,LARANJA)
-        texto2 = fonte_menu2.render('MELHOR  SCORE  =  %d' % record,True,LARANJA)
-        texto3 = fonte_menu1.render('VOLTAR',True,LARANJA)
+        texto1 = fonte_menu1.render('RECORDE',True,AZUL_2)
+        texto2 = fonte_menu2.render('MELHOR  SCORE  =  %d' % record,True,AZUL_2)
+        texto3 = fonte_menu1.render('VOLTAR',True,AZUL_2)
         
         tela.blit(texto1,[(largura_tela / 2) - (texto1.get_size()[0] / 2), 20])
         tela.blit(texto2,[20, 200])
@@ -133,34 +133,34 @@ def menu_creditos():
     while True:
         menu = pygame.image.load('imagens' + os.sep + 'fundo_menu4.jpg')
         tela.blit(menu, [0,0])
-        fonte_menu3 = pygame.font.Font('fontes' + os.sep + 'TURNBB__.TTF',50)
-        fonte_menu4 = pygame.font.Font('fontes' + os.sep + 'TURNBB__.TTF',35)
+        fonte_menu3 = pygame.font.Font('fontes' + os.sep + 'WeareDepraved.ttf',70)
+        fonte_menu4 = pygame.font.Font('fontes' + os.sep + 'WeareDepraved.ttf',55)
         
-        texto1 = fonte_menu3.render('CREDITOS',True,LARANJA)
-        texto2 = fonte_menu4.render('DESEMVOLVEDORES:',True,LARANJA)
-        texto3 = fonte_menu4.render('NATAN MACENA RIBEIRO',True,LARANJA)
-        texto4 = fonte_menu4.render('RONAN DE ARAUJO SOUZA',True,LARANJA)
-        texto5 = fonte_menu4.render('AGRADECIMENTOS:',True,LARANJA)
-        texto6 = fonte_menu4.render('Luiz Augusto Morais',True,LARANJA)
-        texto7 = fonte_menu4.render('Dalton Dario Serey Guerrero',True,LARANJA)
-        texto8 = fonte_menu4.render('Jorge Cesar A. de Figueiredo',True,LARANJA)
-        texto9 = fonte_menu3.render('VOLTAR',True,LARANJA)
+        texto1 = fonte_menu3.render('CREDITOS',True,AZUL_2)
+        texto2 = fonte_menu4.render('DESEMVOLVEDORES',True,AZUL)
+        texto3 = fonte_menu4.render('NATAN MACENA RIBEIRO',True,AZUL)
+        texto4 = fonte_menu4.render('RONAN DE ARAUJO SOUZA',True,AZUL)
+        texto5 = fonte_menu4.render('AGRADECIMENTOS',True,AZUL)
+        texto6 = fonte_menu4.render('LUIZ AUGUSTO MORAIS',True,AZUL)
+        texto7 = fonte_menu4.render('DALTON DARIO SEREY GUERRERO',True,AZUL)
+        texto8 = fonte_menu4.render('JORGE CESAR ABRANTES DE FIGUEIREDO',True,AZUL)
+        texto9 = fonte_menu3.render('VOLTAR',True,AZUL_2)
         
         tela.blit(texto1,[(largura_tela / 2) - (texto1.get_size()[0] / 2), 30])
         tela.blit(texto2,[40, 150])
-        tela.blit(texto3,[60, 250])
-        tela.blit(texto4,[60, 300])
-        tela.blit(texto5,[40, 400])
-        tela.blit(texto6,[60, 500])
-        tela.blit(texto7,[60, 550])
-        tela.blit(texto8,[60, 600])
-        tela.blit(texto9,[750, 700])
+        tela.blit(texto3,[90, 250])
+        tela.blit(texto4,[90, 310])
+        tela.blit(texto5,[40, 410])
+        tela.blit(texto6,[90, 510])
+        tela.blit(texto7,[90, 570])
+        tela.blit(texto8,[90, 630])
+        tela.blit(texto9,[800, 690])
         
-        if posicao_fonte(texto9, [750,700]) or pygame.key.get_pressed()[K_ESCAPE]:
-            tela.blit(fonte_menu3.render('VOLTAR',True, VERMELHO), [750,700])
+        if posicao_fonte(texto9, [800,690]) or pygame.key.get_pressed()[K_ESCAPE]:
+            tela.blit(fonte_menu3.render('VOLTAR',True, VERMELHO), [800,690])
           
         for event in pygame.event.get():
-            if (pygame.mouse.get_pressed()[0] and posicao_fonte(texto9, [750,700])) or pygame.key.get_pressed()[K_ESCAPE]:
+            if (pygame.mouse.get_pressed()[0] and posicao_fonte(texto9, [800,690])) or pygame.key.get_pressed()[K_ESCAPE]:
                 som_voltar.play(0)
                 return True
             elif event.type == pygame.QUIT:
@@ -185,7 +185,7 @@ def menu_ajuda():
         fonte_menu3 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',65)
         fonte_menu4 = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',50)
         
-        texto1 = fonte_menu3.render('AJUDA',True,LARANJA_2)
+        texto1 = fonte_menu3.render('AJUDA',True,AMARELO)
         
         texto2 = fonte_menu4.render('O que fazer?',True,LARANJA)
         texto3 = fonte_menu4.render('Voce tera que desviar dos carros que',True,LARANJA)
@@ -198,7 +198,7 @@ def menu_ajuda():
         texto9 = fonte_menu4.render('Pausar / Voltar',True,LARANJA)
         
         
-        texto10 = fonte_menu3.render('VOLTAR',True,LARANJA_2)
+        texto10 = fonte_menu3.render('VOLTAR',True,AMARELO)
         
         tela.blit(texto1,[(largura_tela / 2) - (texto1.get_size()[0] / 2), 10])
         tela.blit(texto2,[20, 100])
@@ -211,13 +211,13 @@ def menu_ajuda():
         tela.blit(texto8,[150, 460])
         tela.blit(texto9,[150, 530])
         
-        tela.blit(texto10,[730, 630])
+        tela.blit(texto10,[730, 650])
         
-        if posicao_fonte(texto10, [730,630]) or pygame.key.get_pressed()[K_ESCAPE]:
-            tela.blit(fonte_menu3.render('VOLTAR',True, BRANCO), [730,630])
+        if posicao_fonte(texto10, [730,650]) or pygame.key.get_pressed()[K_ESCAPE]:
+            tela.blit(fonte_menu3.render('VOLTAR',True, VERMELHO), [730,650])
           
         for event in pygame.event.get():
-            if (pygame.mouse.get_pressed()[0] and posicao_fonte(texto9, [730,630])) or pygame.key.get_pressed()[K_ESCAPE]:
+            if (pygame.mouse.get_pressed()[0] and posicao_fonte(texto9, [730,650])) or pygame.key.get_pressed()[K_ESCAPE]:
                 som_voltar.play(0)
                 return True
             elif event.type == pygame.QUIT:
@@ -229,26 +229,26 @@ def menu_ajuda():
 def menu_sair():
     escape = 0
     while True:
-        fonte_sair = pygame.font.Font('fontes' + os.sep + 'Staubach.ttf',70)
+        fonte_sair = pygame.font.Font('fontes' + os.sep + 'NOZSTUDIO.ttf',45)
         
-        texto_sair = fonte_sair.render("Ir voltar para o Menu?",True,VERMELHO)
+        texto_sair = fonte_sair.render("DESEJA CONTINUAR?",True,AZUL_2)
         
-        sub_texto_sair1 = fonte_sair.render("Sim",True,VERMELHO)
-        sub_texto_sair2 = fonte_sair.render("Continuar Jogando",True,VERMELHO)
+        sub_texto_sair1 = fonte_sair.render("NAO",True,AZUL_2)
+        sub_texto_sair2 = fonte_sair.render("SIM",True,AZUL_2)
         
         tela.blit(texto_sair, [(512 - texto_sair.get_size()[0] / 2),200])
-        tela.blit(sub_texto_sair1, [120,300])
-        tela.blit(sub_texto_sair2, [330,300])
+        tela.blit(sub_texto_sair1, [550,270])
+        tela.blit(sub_texto_sair2, [350,270])
         
-        if posicao_fonte(sub_texto_sair1, [120,300]):
-            tela.blit(fonte_sair.render("Sim",True,CINZA),[120,300])
-        elif posicao_fonte(sub_texto_sair2, [330,300]):
-            tela.blit(fonte_sair.render("Continuar Jogando",True,CINZA),[330,300])
+        if posicao_fonte(sub_texto_sair1, [550,270]):
+            tela.blit(fonte_sair.render("NAO",True,LARANJA_2),[550,270])
+        elif posicao_fonte(sub_texto_sair2, [350,270]):
+            tela.blit(fonte_sair.render("SIM",True,LARANJA_2),[350,270])
             
         for event in pygame.event.get():
-            if pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_sair1, [120,300]):
+            if pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_sair1, [550,270]):
                 return True
-            elif pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_sair2, [330,300]):
+            elif pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_sair2, [350,270]):
                 return False
             if pygame.key.get_pressed()[K_ESCAPE] and escape > 10:
                 som_voltar.play(0)
@@ -268,11 +268,9 @@ def fim_de_jogo(score):
     
     if score > record:
         record = score
-        print record
-        # Salvando record
+        # Salvando record e criptografando - protocolo numero 2
         with open('salve_recordes' + os.sep + 'save_record.dat', 'wb') as f:
-            pickle.dump(score, f)
-            ''', protocol=2)'''
+            pickle.dump(score, f, 2)
             imprima_record = True
     
             fonte_record = pygame.font.Font('fontes' + os.sep + 'nextwaveboldital.ttf',90)
@@ -283,20 +281,20 @@ def fim_de_jogo(score):
         fonte_fim = pygame.font.Font('fontes' + os.sep + 'JUSTFIST2.ttf',70)
         texto_fim = fonte_fim.render("GAME OVER",True,VERMELHO)
         
-        tela.blit(texto_fim, [(1024 / 2) - (texto_fim.get_size()[0] / 2), 200])
+        tela.blit(texto_fim, [(1024 / 2) - (texto_fim.get_size()[0] / 2), 150])
         if imprima_record:
             tela.blit(texto_record, [(1024 / 2) - (texto_record.get_size()[0] / 2), 300])
             tela.blit(texto_score, [(1024 / 2) - (texto_score.get_size()[0] / 2), 350])
         
         pygame.display.update()
-        pygame.time.delay(5000)
+        pygame.time.delay(6000)
         return True
         
 # Menu Principal
 def menu_raiz():
     # Carregando fontes
-    fonte_menu = pygame.font.Font('fontes' + os.sep + 'Mostwasted.ttf',70)
-    fonte_menu2 = pygame.font.Font('fontes' + os.sep + 'Mostwasted.ttf',65)
+    fonte_menu = pygame.font.Font('fontes' + os.sep + 'VirtualBliss.ttf',70)
+    fonte_menu2 = pygame.font.Font('fontes' + os.sep + 'VirtualBliss.ttf',65)
     
     texto_menu = fonte_menu.render("Need Py Speed",True,AMARELO)
     
@@ -304,12 +302,12 @@ def menu_raiz():
     sub_texto_menu2 = fonte_menu2.render("Ajuda",True,AMARELO)
     sub_texto_menu3 = fonte_menu2.render("Recorde",True,AMARELO)
     sub_texto_menu4 = fonte_menu2.render("Creditos",True,AMARELO)
-    sub_texto_menu5 = fonte_menu2.render("Reset Recorde",True,AMARELO)
+    sub_texto_menu5 = fonte_menu2.render("Apagar Recorde",True,AMARELO)
     sub_texto_menu6 = fonte_menu2.render("Sair",True,AMARELO)
     
     # Som do menu
     pygame.mixer.pre_init(44100, -16, 2, 2048)
-    pygame.mixer.music.load('musicas' + os.sep + 'som_menu.mp3')
+    pygame.mixer.music.load('musicas' + os.sep + random.choice(listas_musicas_menu))
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(1)
 
@@ -336,13 +334,13 @@ def menu_raiz():
         elif posicao_fonte(sub_texto_menu4, [40,450]):
             tela.blit(fonte_menu2.render("Creditos",True,VERMELHO),[40,450])
         elif posicao_fonte(sub_texto_menu5, [40,550]):
-            tela.blit(fonte_menu2.render("Reset Recorde",True,VERMELHO),[40,550])
+            tela.blit(fonte_menu2.render("Apagar Recorde",True,VERMELHO),[40,550])
         elif posicao_fonte(sub_texto_menu6, [40,650]):
             tela.blit(fonte_menu2.render("Sair",True,VERMELHO),[40,650])
         
         for event in pygame.event.get():
             if pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_menu1, [40,150]):
-                som_menu1.play(0)
+                som_menu2.play(0)
                 pygame.mixer.music.stop()
                 return True
             elif pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_menu2, [40,250]):
@@ -350,12 +348,15 @@ def menu_raiz():
                 if menu_ajuda():
                     continue
             elif pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_menu3, [40,350]):
+                som_menu1.play(0)
                 if menu_recorde():
                     continue            
             elif pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_menu4, [40,450]):
+                som_menu1.play(0)
                 if menu_creditos():
                     continue
             elif pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_menu5, [40,550]):
+                som_menu1.play(0)
                 if menu_reset():
                     continue
             elif pygame.mouse.get_pressed()[0] and posicao_fonte(sub_texto_menu6, [40,650]):
@@ -379,5 +380,6 @@ LARANJA_2 = (251, 79, 12)
 VERMELHO = (255, 0, 0)
 VERDE = (0, 128, 0)
 AZUL = (51, 181, 205)
+AZUL_2 = (0, 0, 255)
 CINZA = (128, 128, 128)
 BRANCO = (255, 255, 255)

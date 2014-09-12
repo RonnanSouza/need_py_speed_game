@@ -18,9 +18,9 @@ class Bebida(pygame.sprite.Sprite):
 
     def mover_bebida(self, print_bebida):
         if self.posicao == [480, 350]:
-            self.pos_comb_x -= 0.24 * (self.tam_comb_x / 10)
+            self.pos_comb_x -= 0.1 * (self.tam_comb_x / 10)
         elif self.posicao == [505, 350]:
-            self.pos_comb_x += 0.12 * (self.tam_comb_x / 10)
+            self.pos_comb_x += 0.05 * (self.tam_comb_x / 10)
 
         self.pos_comb_y += 0.1 * (self.tam_comb_y / 10)
         self.tam_comb_x += 1
