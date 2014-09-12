@@ -219,9 +219,11 @@ def jogar():
             i += 1 
             cont_score += 0.1
             
+            # Efeito Bebida
             if cont_bebida == 75:
                 velocidade_carro = 20
             cont_bebida += 1
+            ##
 
 # Iniciar Jogo
 jogar()
