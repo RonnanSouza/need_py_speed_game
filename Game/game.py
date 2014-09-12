@@ -110,7 +110,7 @@ def jogar():
             ##
             
             # Bonus extra
-            if int(score) % 5000 == 0 and int(score) % 1000 != 0 and score > 0:
+            if int(score) % 5000 == 0 and score > 0:
                 cont_exibir = 0
                 cont_score += 5.0
                 bonus = 10
@@ -137,7 +137,7 @@ def jogar():
                 cor_font = LARANJA
                 bateu = False
                         
-            if int(score) % 1000 == 0 and score > 0:
+            if int(score) % 1000 == 0 and int(score) % 5000 != 0 and score > 0:
                 som_bonus2.play(0)
                 cont_score += 5.0
                 cont_exibir = 0
